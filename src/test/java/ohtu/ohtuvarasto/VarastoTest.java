@@ -65,4 +65,69 @@ public class VarastoTest {
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
 
+        @Test
+    public void eiNegatiivistaVarastoa() {
+        varasto = new Varasto(-5);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(0, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+        @Test
+    public void eiNegatiivistaVarastoaAlkusaldolla() {
+        varasto = new Varasto(-5, 1.1);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(0, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+        @Test
+    public void alkusaldollinenAlustusToimii() {
+        varasto = new Varasto(5, 1.1);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(5, varasto.getTilavuus(), vertailuTarkkuus);
+    }
+    
+            @Test
+    public void eiNegatiivistaAlkusaldoa() {
+        varasto = new Varasto(5, -1.1);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+            @Test
+    public void eiNegatiivistaLisaysta() {
+        varasto = new Varasto(5, 1);
+        varasto.lisaaVarastoon(-3);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(1, varasto.getSaldo(), vertailuTarkkuus);
+    }
+
+            @Test
+    public void eiYlitäyteenLisaysta() {
+        varasto = new Varasto(5, 1);
+        varasto.lisaaVarastoon(5);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(5, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+                @Test
+    public void toStringToimii() {
+        varasto = new Varasto(5, 1);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals("saldo = 1.0, vielä tilaa 4.0", varasto.toString());
+    }
+
+            @Test
+    public void eiVoiOttaaNegatiivistaMaaraa() {
+        varasto = new Varasto(5, 2);
+        varasto.otaVarastosta(-2);
+
+        // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
+        assertEquals(2, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
 }
